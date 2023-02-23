@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:newsapp/api/newsmodel_api.dart';
-import 'package:newsapp/model/news_model.dart';
+import '../constants/str_constants.dart';
+import '../model/result.dart';
 
 
 class NewsModelProvider extends ChangeNotifier{
   final service=NewsModelAPI();
   bool isLoading=false;
-  List<NewsModel> newsModels=[];
+  Result r=Result(msg: StrConstants.noOutput, newsModels: []);
 
   Future<void> getAllNews(String newsCategory) async{
     isLoading=true;
     notifyListeners();
 
-    newsModels=await compute(service.getAll, newsCategory);
+    r=await compute(service.getAll, newsCategory);
     //newsModels=await service.getAll(newsCategory)
 
     isLoading=false;

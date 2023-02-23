@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/constants/nav_constants.dart';
-import 'package:newsapp/navigation/customroute.dart';
-import 'package:newsapp/state_management/newsmodel_provider.dart';
 import 'package:provider/provider.dart';
+import '../constants/nav_constants.dart';
+import '../navigation/customroute.dart';
+import '../state_management/newsmodel_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        initialRoute: NavConstants.home,
+        initialRoute: NavConstants.splashScreenPage,
         onGenerateRoute: CustomRoute.generateRoute,
       ),
     );

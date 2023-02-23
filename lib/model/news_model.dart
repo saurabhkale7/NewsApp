@@ -1,7 +1,9 @@
+import '../constants/str_constants.dart';
+
 class NewsModel{
   final Map<String,dynamic> source;
   final String author;
-  final String? title;
+  final String title;
   final String desc;
   final String url;
   final String urlToImage;
@@ -13,13 +15,13 @@ class NewsModel{
 
   factory NewsModel.jsonToObject(Map<String, dynamic> json)=>NewsModel(
     source: json['source'] as Map<String, dynamic>,
-    author: json['author'],
-    title: json['title'],
-    desc: json['desc'],
-    url: json['url'],
-    urlToImage: json['urlToImage'],
-    publishedAt: json['publishedAt'],
-    content: json['content'],
+    author: json['author']??StrConstants.emptyStr,
+    title: json['title']??StrConstants.emptyStr,
+    desc: json['desc']??StrConstants.emptyStr,
+    url: json['url']??StrConstants.emptyStr,
+    urlToImage: json['urlToImage']??StrConstants.emptyStr,
+    publishedAt: json['publishedAt']??StrConstants.emptyStr,
+    content: json['content']??StrConstants.emptyStr,
   );
 
 
