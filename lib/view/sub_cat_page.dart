@@ -19,7 +19,7 @@ class _NextPageState extends State<NextPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE6E6FA),
+      backgroundColor: commonBackgroundColor,
       appBar: getAppBar(StrConstants.newsApp),
       body: Padding(
         //color: Color(0xffE6E6FA),

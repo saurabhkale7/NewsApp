@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/constants/str_constants.dart';
 import 'package:provider/provider.dart';
 import '../constants/nav_constants.dart';
 import '../navigation/customroute.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context)=>NewsModelProvider(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: StrConstants.newsApp,
         theme: ThemeData(
           // This is the theme of your application.
           //

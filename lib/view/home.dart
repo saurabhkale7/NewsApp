@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import '../constants/constant_widgets.dart';
@@ -15,28 +17,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late bool flag = false;
 
-  final List<Text> li = <Text>[
-    Text(
-      StrConstants.myArray[0][0],
-      style: getTileTextStyle,
-    ),
-    Text(
-      StrConstants.myArray[0][1],
-      style: getTileTextStyle,
-    ),
-    Text(
-      StrConstants.myArray[0][2],
-      style: getTileTextStyle,
-    ),
-    Text(
-      StrConstants.myArray[0][3],
-      style: getTileTextStyle,
-    ),
-    Text(
-      StrConstants.myArray[0][3],
-      style: getTileTextStyle,
-    ),
-  ];
+  //final List<Text> li = <Text>[];
+  late final List<Text> li;
+
+  List<Text> getLi() {
+    List<Text> l=[];
+    for (String x in StrConstants.myArray[0]) {
+      l.add(Text(
+        x,
+        style: getTileTextStyle,
+      ));
+    }
+    return l;
+  }
 
   Future<bool> _onWillPop() {
     if (flag == false) {
@@ -52,6 +45,9 @@ class _HomeState extends State<Home> {
         ),
       );
       flag = true;
+      Timer(const Duration(seconds: 3), () {
+        flag = false;
+      });
       return Future.value(false);
     }
 
@@ -60,11 +56,18 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    li=getLi();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
-        backgroundColor: const Color(0xffE6E6FA),
+        backgroundColor: commonBackgroundColor,
         appBar: AppBar(
           title: const Text(
             StrConstants.newsApp,

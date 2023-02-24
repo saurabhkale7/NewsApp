@@ -8,19 +8,19 @@ import '../constants/str_constants.dart';
 
 class NewsModelAPI {
   Future<Result> getAll(String newsCategory) async {
-    final String url;
+    String url="";
+    bool flag=false;
 
-    if (newsCategory == StrConstants.myArray[2][0]) {
-      url = APIConstants.topHeadlines+StrConstants.ind;
-    } else if (newsCategory == StrConstants.myArray[2][1]) {
-      url = APIConstants.topHeadlines+StrConstants.us;
-    } else if (newsCategory == StrConstants.myArray[2][2]) {
-      url = APIConstants.topHeadlines+StrConstants.gb;
-    } else if (newsCategory == StrConstants.myArray[2][3]) {
-      url = APIConstants.topHeadlines+StrConstants.au;
-    } else {
+    for(int i=0;i<StrConstants.myArray[3].length;i++){
+      if(newsCategory.compareTo(StrConstants.myArray[3][i])==0){
+        url = APIConstants.topHeadlines+StrConstants.countryCodes[i];
+        flag=true;
+        break;
+      }
+    }
+
+    if(flag==false) {
       url = APIConstants.everything+newsCategory;
-      //debugPrint("ok josh");
     }
 
     try {

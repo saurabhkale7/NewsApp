@@ -33,7 +33,7 @@ class _MyGridViewState extends State<MyGridView> {
           return InkWell(
             //child: Ink(
             child: Card(
-              //color: const Color(0xffE6E6FA),
+              //color: commonBackgroundColor,
               color: Colors.transparent,
               elevation: 10,
               // shape: RoundedRectangleBorder(

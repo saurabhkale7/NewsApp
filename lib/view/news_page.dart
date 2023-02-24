@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../constants/font_constants.dart';
 import '../constants/str_constants.dart';
 import '../model/news_model.dart';
 import '../state_management/newsmodel_provider.dart';
@@ -33,34 +32,35 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<NewsModel> techModels=[];
+    List<NewsModel> techModels = [];
     return Scaffold(
       appBar: AppBar(
         title: Text(
           newsCategory,
-          style: const TextStyle(
-              color: Colors.black,
-              fontSize: 28,
-              fontFamily: FontConstants.raleway,
-              fontWeight: FontWeight.bold),
+          style: appBarTextStyle,
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: iconThemeData,
         backgroundColor: Colors.white,
         actions: [
-          IconButton(
-            onPressed: () {
-              // method to show the search bar
-              showSearch(
-                  context: context,
-                  // delegate to customize the search bar
-                  delegate: NewsSearchDelegate(techModels: techModels, newsCategory: newsCategory)
-              );
-            },
-            icon: const Icon(Icons.search),
-          )
+          Consumer<NewsModelProvider>(builder: (context1, value, child) {
+            return IconButton(
+              onPressed: value.isLoading
+                  ? null
+                  : () {
+                      // method to show the search bar
+                      showSearch(
+                          context: context,
+                          // delegate to customize the search bar
+                          delegate: NewsSearchDelegate(
+                              techModels: techModels,
+                              newsCategory: newsCategory));
+                    },
+              icon: const Icon(Icons.search),
+            );
+          }),
         ],
       ),
-      backgroundColor: const Color(0xFFE6E6FA),
+      backgroundColor: commonBackgroundColor,
       body: Consumer<NewsModelProvider>(builder: (context1, value, child) {
         if (value.isLoading) {
           return const Center(
@@ -76,17 +76,24 @@ class _NewsPageState extends State<NewsPage> {
 
           return AlertDialog(
             shape: roundRectBorder,
-            title: Text(flag == true ? StrConstants.info : StrConstants.error, style: commonTextStyle,),
-            content: Text(flag == true ? value.r.msg : StrConstants.tryAgain + value.r.msg),
+            title: Text(
+              flag == true ? StrConstants.info : StrConstants.error,
+              style: alertTitleStyle,
+            ),
+            content: Text(
+              flag == true ? value.r.msg : StrConstants.tryAgain + value.r.msg,
+              style: alertContentStyle,
+            ),
             actions: [
-              TextButton(onPressed: () {
-                Navigator.pop(context);
-                //Navigator.pop(context);
-              }, child: const Text(StrConstants.ok)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    //Navigator.pop(context);
+                  },
+                  child: const Text(StrConstants.ok)),
             ],
           );
-        }
-        else {
+        } else {
           techModels = value.r.newsModels;
 
           return getPage(context, techModels, newsCategory);

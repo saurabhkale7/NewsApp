@@ -53,10 +53,11 @@ class Details extends StatelessWidget {
                           shape: roundRectBorder,
                           title: Text(
                             StrConstants.error,
-                            style: commonTextStyle,
+                            style: alertTitleStyle,
                           ),
                           content: Text(
                             StrConstants.urlError + e.toString(),
+                            style: alertContentStyle,
                           ),
                           actions: [
                             TextButton(

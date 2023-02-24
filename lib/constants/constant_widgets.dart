@@ -14,7 +14,13 @@ TextStyle getGridTextStyle = const TextStyle(
 
 TextStyle getTileTextStyle = getGridTextStyle;
 
-TextStyle commonTextStyle = getGridTextStyle;
+TextStyle alertTitleStyle = const TextStyle(
+  fontSize: 32,
+  fontFamily: FontConstants.raleway,
+);
+
+TextStyle alertContentStyle =
+    const TextStyle(fontFamily: FontConstants.junge, fontSize: 20);
 
 List<AssetImage> images = const [
   AssetImage(ImageConstants.launcherMdpi),
@@ -24,20 +30,27 @@ List<AssetImage> images = const [
   AssetImage(ImageConstants.launcherXxxhdpi),
 ];
 
+TextStyle appBarTextStyle=const TextStyle(
+    color: Colors.black,
+    fontSize: 28,
+    fontFamily: FontConstants.raleway,
+    fontWeight: FontWeight.bold
+);
+
+IconThemeData iconThemeData = const IconThemeData(color: Colors.black);
+
 AppBar getAppBar(final String str) {
   return AppBar(
     title: Text(
       str,
-      style: const TextStyle(
-          color: Colors.black,
-          fontSize: 28,
-          fontFamily: FontConstants.raleway,
-          fontWeight: FontWeight.bold),
+      style: appBarTextStyle,
     ),
-    iconTheme: const IconThemeData(color: Colors.black),
+    iconTheme: iconThemeData,
     backgroundColor: Colors.white,
   );
 }
+
+Color commonBackgroundColor=const Color(0xFFE6E6FA);
 
 TextStyle getTitleStyle = const TextStyle(
   fontSize: 64,
